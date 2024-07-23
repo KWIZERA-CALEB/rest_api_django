@@ -47,6 +47,7 @@ const EditTodo = () => {
 
             const newTodo = await editSingleTodo(id, data)
             navigate(`/todo/${todo.id}`)
+            console.log(newTodo)
             return newTodo
         }catch(error) {
             console.log(error)

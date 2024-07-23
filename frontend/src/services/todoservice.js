@@ -42,3 +42,13 @@ export const editSingleTodo = async (id, data)=> {
         throw error
     }
 }
+
+export const addTodo = async (data)=> {
+    try {
+        const todo = await axios.post(`${BASE_API_URL}/api/add/`, data)
+        return todo.data
+    }catch(error) {
+        console.log(error)
+        throw error
+    }
+}
