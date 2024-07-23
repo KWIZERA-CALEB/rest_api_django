@@ -3,6 +3,8 @@ from rest_framework.response import Response # for returning a response
 from todos.models import Todo # model
 from rest_framework import status # to give http response
 from .serializers import TodoSerializer
+from .serializers import UserSerializer
+from django.contrib.auth.models import User # user model
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -29,10 +31,25 @@ def getRoutes(request):
         'GET /api/todo/<id>/',
         'POST /api/add',
         'DELETE /api/delete/todo/<id>/',
-        'PUT /api/update/todo/<id>/'
+        'PUT /api/update/todo/<id>/',
+        'POST /api/register'
     ]
 
     return Response(routes)
+
+
+# Register user
+@api_view(['POST'])
+def register(request):
+    serializer = UserSerializer(data=request.data)
+    if request.method == 'POST':
+        if serializer.is_valid():
+            serializer.save()
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 
 # Get the todos
