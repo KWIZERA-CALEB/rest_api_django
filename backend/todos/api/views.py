@@ -12,7 +12,7 @@ def getRoutes(request):
         'GET /api/todo/<id>/',
         'POST /api/add',
         'DELETE /api/delete/todo/<id>/',
-        'POST /api/update/todo/<id>/'
+        'PUT /api/update/todo/<id>/'
     ]
 
     return Response(routes)
@@ -60,11 +60,11 @@ def singleTodo(request, pk):
 
 
 # Update a todo
-@api_view(['POST'])
+@api_view(['PUT'])
 def updateTodo(request, pk):
     todo = Todo.objects.get(id=pk)
 
-    if request.method == 'POST':
+    if request.method == 'PUT':
         # collect form data
         serializer = TodoSerializer(todo, data=request.data)
         if serializer.is_valid():

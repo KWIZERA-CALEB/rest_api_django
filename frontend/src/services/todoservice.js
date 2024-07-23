@@ -21,3 +21,24 @@ export const destroyTodo = async (id)=> {
         throw error
     }
 }
+
+
+export const fetchSingleTodo = async (id)=> {
+    try {
+        const todo = await axios.get(`${BASE_API_URL}/api/todo/${id}/`)
+        return todo.data
+    }catch(error) {
+        console.log(error)
+        throw error
+    }
+}
+
+export const editSingleTodo = async (id, data)=> {
+    try {
+        const todo = await axios.put(`${BASE_API_URL}/api/update/todo/${id}/`, data)
+        return todo.data
+    }catch(error) {
+        console.log(error)
+        throw error
+    }
+}
