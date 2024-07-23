@@ -9,7 +9,10 @@ def getRoutes(request):
     routes = [
         'GET /api',
         'GET /api/todos',
-        'POST /api/add'
+        'GET /api/todo/<id>/',
+        'POST /api/add',
+        'DELETE /api/delete/todo/<id>/',
+        'POST /api/update/todo/<id>/'
     ]
 
     return Response(routes)
@@ -31,13 +34,16 @@ def addTodo(request):
     serializer = TodoSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
+
 # delete todo
-@api_view(['POST'])
+@api_view(['DELETE'])
 def deleteTodo(request, pk):
     todo = Todo.objects.get(id=pk)
-    if request.method == 'POST':
+    if request.method == 'DELETE':
         todo.delete()
 
     return Response({'error':'Todo Deleted'}, status=status.HTTP_200_OK)
@@ -63,5 +69,7 @@ def updateTodo(request, pk):
         serializer = TodoSerializer(todo, data=request.data)
         if serializer.is_valid():
             serializer.save()
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     return Response({'error':'Todo Updated'}, status=status.HTTP_200_OK)
