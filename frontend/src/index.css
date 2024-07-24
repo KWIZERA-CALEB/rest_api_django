@@ -1,4 +1,27 @@
-body {
-    background-color: black;
-    color: white;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fonts */
+@font-face {
+    font-family: logo;
+    src: url(../public/fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
+}
+
+.logo {
+    font-family: logo;
+}
+
+@font-face {
+    font-family: custom;
+    src: url(../public/fonts/Roboto/Roboto-Medium.ttf);
+}
+
+.custom {
+    font-family: custom;
+}
+
+::selection {
+    background-color: #34D399;
+    color: #FFFFFF;
 }
