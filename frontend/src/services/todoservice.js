@@ -4,7 +4,13 @@ const BASE_API_URL = 'http://127.0.0.1:8000'
 
 export const fetchTodos = async ()=> {
     try {
-        const response = await axios.get(`${BASE_API_URL}/api/todos/`)
+        const token = localStorage.getItem('accesstoken');
+        const response = await axios.get(`${BASE_API_URL}/api/todos/`, {
+            headers: { 
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        })
         return response.data
     }catch(error) {
         console.log(error)
@@ -43,12 +49,18 @@ export const editSingleTodo = async (id, data)=> {
     }
 }
 
-export const addTodo = async (data)=> {
+export const addTodo = async (data) => {
     try {
-        const todo = await axios.post(`${BASE_API_URL}/api/add/`, data)
-        return todo.data
-    }catch(error) {
-        console.log(error)
-        throw error
+        const token = localStorage.getItem('accesstoken');
+        const response = await axios.post(`${BASE_API_URL}/api/add/`, data, {
+            headers: { 
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        });
+        return response.data;
+    } catch (error) {
+        console.error(error);
+        throw error;
     }
-}
+};
