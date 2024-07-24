@@ -23,6 +23,8 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
+
+
 @api_view(['GET'])
 def getRoutes(request):
     routes = [
@@ -61,6 +63,15 @@ def getTodos(request):
     json_data = serializer.data
     return Response(json_data, status=status.HTTP_200_OK)
 
+# Get userinfo
+@api_view(['GET'])
+def getUserInfo(request):
+    user = request.user
+    if user.is_authenticated:
+        serializer = UserSerializer(user, many=False)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    else:
+        return Response({"detail": "Authentication credentials were not provided."}, status=status.HTTP_401_UNAUTHORIZED)
 
 # add todo
 @api_view(['POST'])
