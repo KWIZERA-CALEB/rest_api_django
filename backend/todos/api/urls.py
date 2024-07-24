@@ -15,6 +15,7 @@ urlpatterns = [
     path('todo/<str:pk>/', views.singleTodo),
     path('update/todo/<str:pk>/', views.updateTodo),
     path('register/', views.register),
+    path('user/', views.getUserInfo),
 
     path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
