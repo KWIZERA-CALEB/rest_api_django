@@ -47,17 +47,17 @@ def register(request):
     if request.method == 'POST':
         if serializer.is_valid():
             serializer.save()
+            return Response({"message": "User Registered Successfully"}, status=status.HTTP_201_CREATED)
         else:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    return Response(serializer.data, status=status.HTTP_200_OK)
-
-
+    return Response({"error": "Invalid request method"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 # Get the todos
 @api_view(['GET'])
 def getTodos(request):
-    todos = Todo.objects.all()
+    user = request.user
+    todos = Todo.objects.filter(owner=user)
     # serialize the data to json
     serializer = TodoSerializer(todos, many=True)
     json_data = serializer.data
@@ -78,7 +78,7 @@ def getUserInfo(request):
 def addTodo(request):
     serializer = TodoSerializer(data=request.data)
     if serializer.is_valid():
-        serializer.save()
+        serializer.save(owner=request.user)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     return Response(serializer.data, status=status.HTTP_200_OK)
