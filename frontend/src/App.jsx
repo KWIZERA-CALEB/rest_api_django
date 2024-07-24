@@ -4,6 +4,7 @@ import Todos from './pages/Todos'
 import SingleTodo from './pages/SingleTodo'
 import EditTodo from './pages/EditTodo'
 import CreateTodo from './pages/CreateTodo'
+import Login from './pages/Login'
 
 
 
@@ -14,6 +15,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Welcome />} />
+        <Route path="/login" element={<Login />} />
 
         <Route path="/todos" element={<Todos />} />
         <Route path="/add" element={<CreateTodo />} />
