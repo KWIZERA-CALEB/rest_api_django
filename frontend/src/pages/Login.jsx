@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import { loginUser } from '../services/loginservice'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 const Login = () => {
     const [username, setUsername] = useState('')
@@ -33,19 +35,28 @@ const Login = () => {
 
 
   return (
-    <div>
-      <form onSubmit={handleLogin}>
-        <div>
-            <input type="text" placeholder="Username" value={username} onChange={handleUsernameChange} />
+  <>
+        <div className='h-[100vh] w-full flex justify-center items-center'>
+            <div className='border-[2px] border-solid border-gray-300 rounded-[20px] p-[40px] w-[500px]'>
+                <div className="font-bold text-slate-500 logo flex justify-center items-center p-[14px]">LOGIN</div>
+                <form onSubmit={handleLogin}>
+                    <div className="mb-[30px]">
+                        <TextField type="text" label="Username" className="w-full" value={username} onChange={handleUsernameChange} variant="standard" />
+                    </div>
+                    <div className="mb-[30px]">
+                        <TextField type="password" label="Password" className="w-full" value={password} onChange={handlePasswordChange} variant="standard" />
+                    </div>
+                    <div className="mb-[30px]">
+                        <Button type="submit" className="w-full" variant="contained">Login</Button>
+                    </div>
+                </form>
+                <Link to={'/register'}>
+                    <div className="font-bold text-blue-500 underline logo flex justify-center items-center p-[14px]">REGISTER</div>
+                </Link>
+            </div>
         </div>
-        <div>
-            <input type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
-        </div>
-        <div>
-            <button type="submit">Login</button>
-        </div>
-      </form>
-    </div>
+        <div className="w-full h-[90px] fixed bottom-0 font-bold text-slate-500 custom flex justify-center items-center border-t-[2px] border-gray-300 p-[14px]">Designed with &nbsp;<span className="text-red-500">❤</span>&nbsp; By Caleb</div>
+    </>
   )
 }
 
