@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: my-django-app
+    env: python
+    plan: free
+    buildCommand: 
+      - pip install -r requirements.txt
+      - python manage.py migrate
+    startCommand: gunicorn myproject.wsgi

@@ -7,7 +7,7 @@ import Skeleton from '@mui/material/Skeleton';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 
-const BASE_API_URL = 'http://127.0.0.1:8000';
+const BASE_API_URL = import.meta.env.VITE_API_URL;
 
 const EditTodo = () => {
     const [title, setTitle] = useState('')
