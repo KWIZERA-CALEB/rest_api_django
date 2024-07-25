@@ -57,7 +57,7 @@ const Todos = () => {
       </div>
 
       <div className="pt-[120px] pb-[30px] pr-[50px] pl-[50px] flex flex-row space-x-[6px]">
-          <div className="w-full grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:w-[80%]">
+          <div className="w-full grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:w-[80%]">
             <Link to={'/add'}>
               <div className="p-[30px] rounded-[12px] h-[170px] border-[2px] border-solid border-gray-300 hover:border-blue-500 flex justify-center items-center hover:cursor-pointer">
                   <div className="p-[20px] w-[60px] flex justify-center items-center border-dashed border-2 border-gray-500 text-[20px] font-bold rounded-full h-[60px]">+</div>
@@ -65,7 +65,7 @@ const Todos = () => {
             </Link>
             <SingleTodo />
           </div>
-          <div className="w-[20%] rounded-[12px] border-[2px] border-solid border-gray-300 p-[30px] hidden md:block">
+          <div className="w-[20%] rounded-[12px] border-[2px] border-solid border-gray-300 p-[30px] hidden lg:block">
             <div className="flex justify-center">
               <img src="/images/upstream_3.png" className="w-[70px] cursor-pointer border-double mb-[30px] border-4 border-sky-500 rounded-full object-cover object-center" alt="Profile" />
             </div>
@@ -75,7 +75,7 @@ const Todos = () => {
           </div>
       </div>
 
-      <div className="w-full h-[90px] fixed bottom-0 font-bold text-slate-500 custom flex justify-center items-center border-t-[2px] border-gray-300 p-[14px]">Designed with &nbsp;<span className="text-red-500">❤</span>&nbsp; By Caleb</div>
+      <div className="w-full h-[90px] fixed bottom-0 font-bold text-slate-500 custom flex justify-center items-center bg-white border-t-[2px] border-gray-300 p-[14px]">Designed with &nbsp;<span className="text-red-500">❤</span>&nbsp; By Caleb</div>
     </>
   );
 };
