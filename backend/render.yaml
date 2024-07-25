@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: my-django-app
+    name: backend
     env: python
     plan: free
     buildCommand: 
