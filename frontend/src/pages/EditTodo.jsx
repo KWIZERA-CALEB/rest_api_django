@@ -4,6 +4,8 @@ import { fetchSingleTodo, editSingleTodo } from '../services/todoservice'
 import axios from 'axios';
 import Button from '@mui/material/Button';
 import Skeleton from '@mui/material/Skeleton';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const BASE_API_URL = 'http://127.0.0.1:8000';
 
@@ -13,6 +15,10 @@ const EditTodo = () => {
     const [todo, setTodo] = useState({id:'', title:'', description:''})
     const [userData, setUserData] = useState(null);
     const { id } = useParams()
+    const [loading, setLoading] = useState(false)
+    const [successOpen, setSuccessOpen] = useState(false)
+    const [errorOpen, setErrorOpen] = useState(false)
+    const [open, setOpen] = useState(false)
     const navigate = useNavigate()
 
 
@@ -42,6 +48,7 @@ const EditTodo = () => {
 
     const handleEditTodo = async (e) => {
         e.preventDefault()
+        setLoading(true)
         try {
 
             const data = {
@@ -50,11 +57,19 @@ const EditTodo = () => {
             }
 
             const newTodo = await editSingleTodo(id, data)
-            navigate(`/todo/${todo.id}`)
-            console.log(newTodo)
+            setLoading(false)
+            setOpen(true)
+            setSuccessOpen(true)
+            setTimeout(()=> {
+                navigate(`/todo/${todo.id}`)
+            }, 5000)
+            navigate()
             return newTodo
         }catch(error) {
             console.log(error)
+            setErrorOpen(true) 
+            setOpen(true)
+            setLoading(false)
             throw error
         }
     }
@@ -97,10 +112,47 @@ const EditTodo = () => {
         navigate('/')
         return;
     }
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+    }
   
 
   return (
     <>
+        { successOpen ? 
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert
+                    onClose={handleClose}
+                    severity="success"
+                    variant="filled"
+                    sx={{ width: '100%' }}
+                >
+                    Updated Successfully
+                </Alert>
+            </Snackbar> 
+            :
+            null
+        }
+
+        { errorOpen ? 
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert
+                    onClose={handleClose}
+                    severity="error"
+                    variant="filled"
+                    sx={{ width: '100%' }}
+                >
+                    Error Occurred
+                </Alert>
+            </Snackbar> 
+            :
+            null
+        }
         <div className="w-full h-[90px] fixed border-b border-solid flex justify-center items-center p-[14px] border-gray-300">
             <div className="font-black text-slate-800 text-[25px] logo">Todo Mate</div>
         </div>
@@ -116,7 +168,11 @@ const EditTodo = () => {
                             <textarea placeholder='Description' className="w-full h-[120px] border-b border-slate-500 border-solid outline-none focus:border-blue-500" value={description} onChange={handleDescriptionChange} ></textarea>
                         </div>
                         <div>
-                            <Button type="submit" className="w-full" variant="contained">Edit Todo</Button>
+                            {loading ?
+                                <Button type="submit" className="w-full" loading variant="contained" disabled>Updating</Button>
+                                    :
+                                <Button type="submit" className="w-full" variant="contained">Edit Todo</Button>
+                            }                        
                         </div>
                     </form>
                 </div>

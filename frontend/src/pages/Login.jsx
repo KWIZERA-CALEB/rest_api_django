@@ -37,7 +37,9 @@ const Login = () => {
             setLoading(false)
             setOpen(true)
             setSuccessOpen(true)           
-            navigate('/todos')
+            setTimeout(()=> {
+                navigate('/todos')
+            }, 5000) 
         }catch(error) {
             setErrorOpen(true) 
             setOpen(true)
