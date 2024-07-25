@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Skeleton from '@mui/material/Skeleton';
 
 
+
 const BASE_API_URL = 'http://127.0.0.1:8000';
 
 const SingleTodo = () => {
@@ -79,7 +80,7 @@ const SingleTodo = () => {
             <div key={todo.id} className="w-full">
               <h3 className="border-b border-solid mb-[30px] border-gray-300 p-[20px] font-black text-[25px] select-none">{todo.title}</h3>
               <blockquote className="border-l-4 border-solid border-slate-500 pl-[20px] mb-[30px]">
-                <p>{todo.description}</p>
+                <p><pre>{todo.description}</pre></p>
               </blockquote>
               <Link to={`/edit/${todo.id}`}>
                   <Button type="submit" variant="contained">Edit Todo</Button>

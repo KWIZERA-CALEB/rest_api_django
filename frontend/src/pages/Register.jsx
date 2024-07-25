@@ -5,6 +5,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import useWindowSize from 'react-use/lib/useWindowSize'
+import Confetti from 'react-confetti'
 
 const Register = () => {
     const [username, setUsername] = useState('')
@@ -14,6 +16,8 @@ const Register = () => {
     const [successOpen, setSuccessOpen] = useState(false)
     const [errorOpen, setErrorOpen] = useState(false)
     const [open, setOpen] = useState(false)
+    const [confeti, setConfeti] = useState(false)
+    const { width, height } = useWindowSize()
     const navigate = useNavigate()
 
     const handleUsernameChange = (e)=> {
@@ -40,9 +44,12 @@ const Register = () => {
             const response = await registerUser(data)
             console.log(response)
             setLoading(false)
+            setConfeti(true)
             setOpen(true)
-            setSuccessOpen(true) 
-            navigate('/login')
+            setSuccessOpen(true)
+            setTimeout(()=> {
+                navigate('/login')
+            }, 5000) 
         }catch(error) {
             console.log(error)
             setErrorOpen(true) 
@@ -62,6 +69,14 @@ const Register = () => {
 
   return (
     <>
+        {confeti &&
+            <Confetti
+            width={width}
+            height={height}
+        />
+        
+        }
+
         { successOpen ? 
             <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                 <Alert

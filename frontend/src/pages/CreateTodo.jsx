@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { addTodo } from '../services/todoservice'
 import axios from 'axios';
 import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import Skeleton from '@mui/material/Skeleton';
 
 
@@ -12,6 +14,10 @@ const CreateTodo = () => {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [userData, setUserData] = useState(null);
+    const [loading, setLoading] = useState(false)
+    const [successOpen, setSuccessOpen] = useState(false)
+    const [errorOpen, setErrorOpen] = useState(false)
+    const [open, setOpen] = useState(false)
     const navigate = useNavigate()
 
 
@@ -25,6 +31,7 @@ const CreateTodo = () => {
 
     const handleAddTodo = async (e) => {
         e.preventDefault()
+        setLoading(true)
         try {
 
             const data = {
@@ -33,11 +40,18 @@ const CreateTodo = () => {
             }
 
             const newTodo = await addTodo(data)
-            navigate('/todos')
-            console.log(newTodo)
+            setLoading(false)
+            setOpen(true)
+            setSuccessOpen(true)
+            setTimeout(()=> {
+                navigate('/todos')
+            }, 5000)
             return newTodo
         }catch(error) {
             console.log(error)
+            setErrorOpen(true) 
+            setOpen(true)
+            setLoading(false)
             throw error
         }
     }
@@ -78,11 +92,48 @@ const CreateTodo = () => {
         navigate('/')
         return;
     }
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+    }
     
 
 
   return (
     <>
+        { successOpen ? 
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert
+                    onClose={handleClose}
+                    severity="success"
+                    variant="filled"
+                    sx={{ width: '100%' }}
+                >
+                    Added Successfully
+                </Alert>
+            </Snackbar> 
+            :
+            null
+        }
+
+        { errorOpen ? 
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert
+                    onClose={handleClose}
+                    severity="error"
+                    variant="filled"
+                    sx={{ width: '100%' }}
+                >
+                    Error Occurred
+                </Alert>
+            </Snackbar> 
+            :
+            null
+        }
         <div className="w-full h-[90px] fixed border-b border-solid flex justify-center items-center p-[14px] border-gray-300">
             <div className="font-black text-slate-800 text-[25px] logo">Todo Mate</div>
         </div>
@@ -98,7 +149,11 @@ const CreateTodo = () => {
                             <textarea placeholder='Description' className="w-full h-[120px] border-b border-slate-500 border-solid outline-none focus:border-blue-500" value={description} onChange={handleDescriptionChange} ></textarea>
                         </div>
                         <div>
+                            {loading ?
+                            <Button type="submit" className="w-full" loading variant="contained" disabled>Adding</Button>
+                                :
                             <Button type="submit" className="w-full" variant="contained">Add Todo</Button>
+                            }
                         </div>
                     </form>
                 </div>
