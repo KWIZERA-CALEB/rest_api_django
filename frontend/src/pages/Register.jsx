@@ -1,11 +1,19 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { registerUser } from '../services/registerservice'
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const Register = () => {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [loading, setLoading] = useState(false)
+    const [successOpen, setSuccessOpen] = useState(false)
+    const [errorOpen, setErrorOpen] = useState(false)
+    const [open, setOpen] = useState(false)
     const navigate = useNavigate()
 
     const handleUsernameChange = (e)=> {
@@ -22,6 +30,7 @@ const Register = () => {
 
     const handleRegister = async (e)=> {
         e.preventDefault()
+        setLoading(true)
         const data = {
             username,
             password,
@@ -30,31 +39,82 @@ const Register = () => {
         try {
             const response = await registerUser(data)
             console.log(response)
+            setLoading(false)
+            setOpen(true)
+            setSuccessOpen(true) 
             navigate('/login')
         }catch(error) {
             console.log(error)
+            setErrorOpen(true) 
+            setOpen(true)
+            setLoading(false)
             throw error
         }
     }
 
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+    }
 
   return (
-    <div>
-      <form onSubmit={handleRegister}>
-        <div>
-            <input type="text" placeholder="Email" value={email} onChange={handleEmailChange} />
+    <>
+        { successOpen ? 
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert
+                    onClose={handleClose}
+                    severity="success"
+                    variant="filled"
+                    sx={{ width: '100%' }}
+                >
+                    Registered Successfully
+                </Alert>
+            </Snackbar> 
+            :
+            null
+        }
+
+        { errorOpen ? 
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert
+                    onClose={handleClose}
+                    severity="error"
+                    variant="filled"
+                    sx={{ width: '100%' }}
+                >
+                    Error Occurred
+                </Alert>
+            </Snackbar> 
+            :
+            null
+        }
+        <div className='h-[100vh] w-full flex justify-center items-center'>
+            <div className='border-[2px] border-solid border-gray-300 rounded-[20px] p-[40px] w-[500px]'>
+                <div className="font-bold text-slate-500 logo flex justify-center items-center p-[14px]">REGISTER</div>
+                <form onSubmit={handleRegister}>
+                    <div className="mb-[30px]">
+                        <TextField type="text" label="Email" className="w-full" value={email} onChange={handleEmailChange} variant="standard" />
+                    </div>
+                    <div className="mb-[30px]">
+                        <TextField type="text" label="Username" className="w-full" value={username} onChange={handleUsernameChange} variant="standard" />
+                    </div>
+                    <div className="mb-[30px]">
+                        <TextField type="password" label="Password" className="w-full" value={password} onChange={handlePasswordChange} variant="standard" />
+                    </div>
+                    <div className="mb-[30px]">
+                        {loading ? <Button type="submit" loading className="w-full" variant="contained" disabled>Loading</Button> : <Button type="submit" className="w-full" variant="contained">Login</Button>}
+                    </div>
+                </form>
+                <Link to={'/login'}>
+                    <div className="font-bold text-blue-500 underline logo flex justify-center items-center p-[14px]">LOGIN</div>
+                </Link>
+            </div>
         </div>
-        <div>
-            <input type="text" placeholder="Username" value={username} onChange={handleUsernameChange} />
-        </div>
-        <div>
-            <input type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
-        </div>
-        <div>
-            <button type="submit">Register</button>
-        </div>
-      </form>
-    </div>
+        <div className="w-full h-[90px] fixed bottom-0 font-bold text-slate-500 custom flex justify-center items-center border-t-[2px] border-gray-300 p-[14px]">Designed with &nbsp;<span className="text-red-500">❤</span>&nbsp; By Caleb</div>
+    </>
   )
 
 }

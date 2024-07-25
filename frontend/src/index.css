@@ -5,7 +5,7 @@
 /* Fonts */
 @font-face {
     font-family: logo;
-    src: url(../public/fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
+    src: url(../fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
 }
 
 .logo {
@@ -14,7 +14,7 @@
 
 @font-face {
     font-family: custom;
-    src: url(../public/fonts/Roboto/Roboto-Medium.ttf);
+    src: url(../fonts/Roboto/Roboto-Medium.ttf);
 }
 
 .custom {
