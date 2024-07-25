@@ -8,7 +8,7 @@ import Alert from '@mui/material/Alert';
 import Skeleton from '@mui/material/Skeleton';
 
 
-const BASE_API_URL = 'http://127.0.0.1:8000';
+const BASE_API_URL = import.meta.env.VITE_API_URL;
 
 const CreateTodo = () => {
     const [title, setTitle] = useState('')

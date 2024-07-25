@@ -13,5 +13,13 @@ py manage.py makemigrations <table_name>
 ** Migrate the migrations
 py manage.py migrate
 
+** Database **
+freesqldatabase.com
+
 ** Required dependencies **
-environ
+django
+mysqlclient
+django-environ
+djangorestframework
+djangorestframework-simplejwt
+django-cors-headers
