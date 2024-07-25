@@ -7,6 +7,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { timeAgo } from '../../utils/formatdate';
+import Tooltip from '@mui/material/Tooltip';
 
 const SingleTodo = () => {
     const [todos, setTodos] = useState([])
@@ -80,7 +81,9 @@ const SingleTodo = () => {
                     </Link>
                     <div className="absolute right-[20px] bottom-[20px]">
                         <IconButton onClick={()=> handleDeleteTodo(todos[i].id)} aria-label="delete">
-                            <DeleteIcon className='hover:cursor-pointer hover:text-red-500' />
+                            <Tooltip title="Delete" arrow>
+                                <DeleteIcon className='hover:cursor-pointer hover:text-red-500' />
+                            </Tooltip>
                         </IconButton>
                     </div>
                 </div>

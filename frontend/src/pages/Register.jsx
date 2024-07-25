@@ -49,7 +49,7 @@ const Register = () => {
             setSuccessOpen(true)
             setTimeout(()=> {
                 navigate('/login')
-            }, 5000) 
+            }, 8000) 
         }catch(error) {
             console.log(error)
             setErrorOpen(true) 

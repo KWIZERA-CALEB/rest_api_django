@@ -12,3 +12,6 @@ py manage.py makemigrations <table_name>
 
 ** Migrate the migrations
 py manage.py migrate
+
+** Required dependencies **
+environ
