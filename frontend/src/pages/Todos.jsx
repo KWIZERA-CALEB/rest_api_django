@@ -3,6 +3,8 @@ import SingleTodo from '../components/atoms/SingleTodo';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Button from '@mui/material/Button';
+import Skeleton from '@mui/material/Skeleton';
+
 
 
 const BASE_API_URL = 'http://127.0.0.1:8000';
@@ -67,8 +69,8 @@ const Todos = () => {
             <div className="flex justify-center">
               <img src="/images/upstream_3.png" className="w-[70px] cursor-pointer border-double mb-[30px] border-4 border-sky-500 rounded-full object-cover object-center" alt="Profile" />
             </div>
-            <div className="custom text-slate-600 text-center text-[20px] font-bold uppercase">{userData ? userData.username : "Guest"}</div>
-            <div className="custom text-slate-400 text-center p-[30px] mb-[40px] border-b border-gray-300 border-solid text-[16px] font-bold lowercase">{userData ? userData.email : "Guest"}</div>
+            <div className="custom text-slate-600 text-center text-[20px] font-bold uppercase">{userData ? userData.username : <Skeleton variant="text" sx={{ fontSize: '1rem' }} />}</div>
+            <div className="custom text-slate-400 text-center p-[30px] mb-[40px] border-b border-gray-300 border-solid text-[16px] font-bold lowercase">{userData ? userData.email : <Skeleton variant="text" sx={{ fontSize: '1rem' }} />}</div>
             <div className="flex justify-center"><Button className="w-full" color="error" onClick={handleLogout} variant="contained">Logout</Button></div>
           </div>
       </div>
