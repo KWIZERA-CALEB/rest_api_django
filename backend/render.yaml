@@ -3,7 +3,5 @@ services:
     name: backend
     env: python
     plan: free
-    buildCommand: 
-      - pip install -r requirements.txt
-      - python manage.py migrate
+    buildCommand: pip install -r requirements.txt && python manage.py migrate
     startCommand: gunicorn backend.backend.wsgi:application
