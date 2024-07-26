@@ -6,4 +6,4 @@ services:
     buildCommand: 
       - pip install -r requirements.txt
       - python manage.py migrate
-    startCommand: gunicorn backend.wsgi
+    startCommand:  gunicorn backend.wsgi:application
