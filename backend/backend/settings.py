@@ -18,9 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 from datetime import timedelta
 
-env = environ.Env(
-     DEBUG=(bool, False)
-)
+env = environ.Env()
 environ.Env.read_env()
 
 
@@ -33,7 +31,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['todo-ment.onrender.com']
+ALLOWED_HOSTS = ['todo-ment.onrender.com', '127.0.0.1']
 
 
 
@@ -144,7 +142,7 @@ DATABASES = {
         'USER': env('DATABASE_USER'),
         'PASSWORD': env('DATABASE_PASS'),
         'HOST': env('DATABASE_HOST'),
-        'PORT':'3306',
+        'PORT': env('PORT'),
     }
 }
 
