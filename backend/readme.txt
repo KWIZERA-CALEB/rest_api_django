@@ -23,3 +23,4 @@ django-environ
 djangorestframework
 djangorestframework-simplejwt
 django-cors-headers
+
