@@ -71,9 +71,9 @@ const SingleTodo = () => {
         renderedTodos.push(
             <>
                 
-                <div key={todos[i].id} className="p-[30px] relative rounded-[12px] h-[170px] border-[2px] border-solid border-gray-300 hover:border-blue-500 hover:cursor-pointer">
+                <div key={todos[i].id} className="p-[10px] relative rounded-[12px] md:h-[170px] border-[2px] border-solid border-gray-300 hover:border-blue-500 hover:cursor-pointer">
                     <div className="w-full">
-                        <img src={img} alt="Image" className="h-[60px] rounded-[12px] w-full object-cover object-center" />
+                        <img src={img} alt="Image" className="h-[120px] md:h-[60px] rounded-[12px] w-full object-cover object-center" />
                     </div>
                     <Link to={`/todo/${todos[i].id}`}>
                         <div className="font-bold text-[18px] mb-[12px] hover:text-blue-500 cursor-pointer text-slate-800 uppercase">{todos[i].title}</div>

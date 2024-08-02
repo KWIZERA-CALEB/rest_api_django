@@ -14,12 +14,12 @@ const Welcome = () => {
         <div className="text-center mb-[40px] hidden custom pl-[20px] pr-[20px] font-bold text-slate-800/[90%] text-[25px] md:block">
         Stay organized and productive with our easy-to-use to-do list manager.
         </div>
-        <div className="text-center mb-[40px] custom pl-[20px] pr-[20px] font-bold text-slate-800/[90%] text-[18px] md:hidden">
+        <div className="text-center mb-[20px] md:mb-[40px] custom pl-[20px] pr-[20px] font-bold text-slate-800/[90%] text-[18px] md:hidden">
             Join Todo Mate
         </div>
 
         <div className="mb-[20px]">
-          <div className="font-black text-green-500 text-[25px] logo">20K + Users</div>
+          <div className="font-black text-green-500 flex justify-center text-[18px] md:text-[25px] logo">20K + Users</div>
           <AvatarGroup total={9}>
             <Avatar alt="img1" src="/images/toon_10.png" />
             <Avatar alt="img2" src="/images/upstream_1.png" />
@@ -27,9 +27,11 @@ const Welcome = () => {
             <Avatar alt="img4" src="/images/upstream_3.png" />
           </AvatarGroup>
         </div>
-        <Link to="/login">
-          <Button variant="contained" className="p-[25px]" >Get Started</Button>
-        </Link>
+        <div className="flex justify-center w-full">
+          <Link to="/login">
+            <Button variant="contained" className="p-[25px]" >Get Started</Button>
+          </Link>
+        </div>
       </div>
     </>
   )
