@@ -52,11 +52,11 @@ const Todos = () => {
 
   return (
     <>
-      <div className="w-full h-[90px] fixed border-b border-solid flex justify-center items-center p-[14px] border-gray-300">
-        <div className="font-black text-slate-800 text-[25px] logo">Todo Mate</div>
+      <div className="w-full h-[60px] md:h-[90px] fixed border-b border-solid flex justify-center items-center p-[14px] border-gray-300">
+        <div className="font-black text-slate-800 text-[20px] md:text-[25px] logo">Todo Mate</div>
       </div>
 
-      <div className="pt-[120px] pb-[30px] pr-[50px] pl-[50px] flex flex-row space-x-[6px]">
+      <div className="pt-[120px] pb-[30px] pr-[10px] pl-[20px] md:pr-[50px] md:pl-[50px] flex flex-row space-x-[6px]">
           <div className="w-full grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:w-[80%]">
             <Link to={'/add'}>
               <div className="p-[30px] rounded-[12px] h-[170px] border-[2px] border-solid border-gray-300 hover:border-blue-500 flex justify-center items-center hover:cursor-pointer">
@@ -75,7 +75,7 @@ const Todos = () => {
           </div>
       </div>
 
-      <div className="w-full h-[90px] fixed bottom-0 font-bold text-slate-500 custom flex justify-center items-center bg-white border-t-[2px] border-gray-300 p-[14px]">Designed with &nbsp;<span className="text-red-500">❤</span>&nbsp; By Caleb</div>
+      <div className="w-full h-[60px] fixed bottom-0 font-bold text-slate-500 custom flex justify-center items-center bg-white border-t-[2px] border-gray-300 p-[14px]">Designed with &nbsp;<span className="text-red-500">❤</span>&nbsp; By Caleb</div>
     </>
   );
 };
