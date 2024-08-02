@@ -11,8 +11,11 @@ const Welcome = () => {
         <div className="font-black text-slate-800 text-[25px] logo">Todo Mate</div>
       </div>
       <div className="h-[100vh] w-full flex flex-col justify-center items-center">
-        <div className="text-center mb-[40px] custom pl-[200px] pr-[200px] font-bold text-slate-800/[90%] text-[25px]">
-        Stay organized and productive with our easy-to-use to-do list manager. Whether you’re planning your day, setting goals, or tracking tasks, our app is here to help you stay on top of it all. Add tasks, set deadlines, and prioritize your activities to achieve more every day.
+        <div className="text-center mb-[40px] hidden custom pl-[20px] pr-[20px] font-bold text-slate-800/[90%] text-[25px] md:block">
+        Stay organized and productive with our easy-to-use to-do list manager.
+        </div>
+        <div className="text-center mb-[40px] custom pl-[20px] pr-[20px] font-bold text-slate-800/[90%] text-[18px] md:hidden">
+            Join Todo Mate
         </div>
 
         <div className="mb-[20px]">
